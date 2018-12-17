@@ -6,7 +6,6 @@ int read_d;
 int touch;
 int ypon;
 
-
 int rco = 255;
 int gco = 0;
 int bco = 0;

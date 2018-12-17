@@ -7,6 +7,8 @@ int touch;
 int xpon;
 int ypon;
 
+int flamer = 300;
+
 float x;
 float y;
 
@@ -46,17 +48,17 @@ void draw() {
     bco = int(random(0, 256));
     if ((x <= circle_X && circle_X <= x + 50) && (y <= circle_Y && circle_Y <= y + 50) && (click == 0)) { //当たり判定
       pt++; //当たったので得点増加
-      click =1;
-      cnt = 299;
+      click = 1;
+      cnt = framer - 1;
     }
   }
-  
-  if (++cnt >= 300) { //180回に一回四角の場所を変える
+
+  if (++cnt >= framer) { //180回に一回四角の場所を変える
     background(204);
     x=random(0, height - 50);
     y=random(0, width - 50);
     click = 0; //この座標でのクリック履歴クリア
-    cnt=0; //更新したのでカウンタクリア
+    cnt = 0; //更新したのでカウンタクリア
   }
 
   background(204);

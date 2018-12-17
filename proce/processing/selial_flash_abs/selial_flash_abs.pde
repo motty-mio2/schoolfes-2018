@@ -50,17 +50,17 @@ void draw() {
       pt++; //当たったので得点増加
       stroke(128,0,0);
       rect(x, y, 50, 50);
-      click =1;
+      click = 1;
       cnt = min - 1;
     }
   }
-  
+
   if (++cnt >= min) {
     background(204);
     x=random(0, height - 50);
     y=random(0, width - 50);
     click = 0; //この座標でのクリック履歴クリア
-    cnt=0; //更新したのでカウンタクリア
+    cnt = 0; //更新したのでカウンタクリア
   }
 
   background(204);
