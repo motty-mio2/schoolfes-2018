@@ -6,6 +6,7 @@ int read_hor = 0;
 int touch;
 int xpon;
 int ypon;
+int dial;
 
 int flamer = 300;
 
@@ -53,7 +54,7 @@ void draw() {
     }
   }
 
-  if (++cnt >= flamer) { //180回に一回四角の場所を変える
+  if (++cnt >= framer) { //180回に一回四角の場所を変える
     background(204);
     x=random(0, height - 50);
     y=random(0, width - 50);
@@ -77,6 +78,7 @@ void serialEvent(Serial myPort) {
   if (myPort.available()>2) {
     xpon = myPort.read();
     ypon = myPort.read();
+    dial = myPort.read();
     touch = myPort.read();
     myPort.write(65);
   }

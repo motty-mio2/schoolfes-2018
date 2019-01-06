@@ -1,0 +1,1 @@
+﻿AcX AcY AcZ GyX GyY GyZ

@@ -1,13 +1,14 @@
-
 #include <Wire.h>
 #include <MR_QMC5883.h>
 
 MR_QMC5883 compass;
 
-int flu  = 3;
-int count =10;
+int start = 0;
+int count = 10;
 
 float ADJUST = 180 / 3.14159265358979; //ラジアン・角度変換
+
+float default_direct = 0.0;
 
 int minX = 0;
 int maxX = 0;
@@ -33,20 +34,28 @@ void setup() {
   compass.setMeasurementMode(QMC5883_CONTINOUS);
   compass.setDataRate(QMC5883_DATARATE_50HZ);
   compass.setSamples(QMC5883_SAMPLES_8);
+
+  while(start == 0){
+    if (digitalRead(1) == 0){
+      Vector mag = compass.readRaw();
+      default_direct = atan2(mag.YAxis, mag.XAxis) * ADJUST;
+      start = 1;
+    }
+  }
 }
 
 void loop() {
   float deg_hor_all = 0;
   int i;
-  for(i=0;i<=9;i++){
-   Vector mag = compass.readRaw();
-   deg_hor_all += atan2(mag.YAxis, mag.XAxis) * ADJUST;
+  for (i = 0; i <= count - 1; i++) {
+    Vector mag = compass.readRaw();
+    deg_hor_all += atan2(mag.YAxis, mag.XAxis) * ADJUST;
   }
   float deg_hor = deg_hor_all / 10;
 
-  if (deg_hor >= 50){
+  if (deg_hor >= 50) {
     deg_hor = 50;
-  } else if (deg_hor <= -50){
+  } else if (deg_hor <= -50) {
     deg_hor = -50;
   }
   hor_d = map((deg_hor), -50, 50, 0, 255);
@@ -68,5 +77,5 @@ void loop() {
     Serial.read();
   }
 
-    delay(10);
+  delay(10);
 }
