@@ -28,14 +28,12 @@ void setup() {
 
 void loop() {
   Vector mag = compass.readRaw();
-  float deg_hor = atan2(mag.YAxis, mag.XAxis) * ADJUST+180;
+  float deg_hor = atan2(mag.YAxis, mag.XAxis) * ADJUST;
   float deg_ver = atan2(mag.ZAxis, sqrt(mag.XAxis * mag.XAxis + mag.YAxis * mag.YAxis)) * ADJUST;
 
   Serial.print(deg_hor);
   Serial.print(",");
   Serial.println(deg_ver);
-
-  Serial.println();
 
   delay(100);
 }
