@@ -28,7 +28,7 @@ void setup() {
   size(640, 640);
   background(255);
   frameRate(60);
-  myPort = new Serial(this, "COM8", 9600);
+  myPort = new Serial(this, "COM13", 9600);
   myPort.write(65);
 }
 

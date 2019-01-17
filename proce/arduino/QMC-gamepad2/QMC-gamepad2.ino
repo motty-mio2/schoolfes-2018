@@ -8,6 +8,8 @@ int count = 10;
 
 float ADJUST = 180 / 3.14159265358979; //ラジアン・角度変換
 
+int lrange = 180;
+int genD;
 float default_direct = 0.0;
 
 int minX = 0;
@@ -53,12 +55,21 @@ void loop() {
   }
   float deg_hor = deg_hor_all / count;
 
-  if (deg_hor >= 50) {
-    deg_hor = 50;
-  } else if (deg_hor <= -50) {
-    deg_hor = -50;
+  genD = deg_hor - default_direct;
+
+  if (genD < -1 * lrange) {
+    genD += 2 * lrange;
+  } else if (genD > lrange) {
+    genD -= 2 * lrange;
   }
-  hor_d = map((deg_hor), -50, 50, 0, 255);
+
+  if (genD >= 50) {
+    genD = 50;
+  } else if (genD <= -50) {
+    genD = -50;
+  }
+
+  hor_d = map((genD), -50, 50, 0, 255);
 
   Regg = map(analogRead(3), 8, 1023, 0, 255);
 
